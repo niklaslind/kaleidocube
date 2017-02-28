@@ -1,0 +1,45 @@
+{
+  "name": "meanTemplate",
+  "version": "0.0.1",
+  "description": "Simple MEAN template",
+  "keywords": [],
+  "license": "BSD-3-Clause",
+  "homepage": "https://github.com/xxx",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cujoproject/xxx"
+  },
+  "bugs": {
+    "url": "https://github.com/xxx/issues"
+  },
+  "engines": {
+    "node": "4.2.1",
+    "npm": "3.3.8"
+  },
+  "main": "server.js",
+  "author": "Jep",
+  "dependencies": {
+    "async": "latest",
+    "bcrypt-nodejs": "latest",
+    "body-parser": "~1.16.1",
+    "bower": "1.8.0",
+    "connect-flash": "~0.1.1",
+    "cookie-parser": "^1.4.3",
+    "debug": "~2.6.1",
+    "ejs": "~2.5.6",
+    "express": "^4.14.1",
+    "express-session": "^1.15.1",
+    "json2csv": "3.7.3",
+    "moment": "latest",
+    "mongoose": "4.8.5",
+    "passport": "~0.3.2",
+    "passport-facebook": "~2.1.1",
+    "passport-google-oauth": "~1.0.0",
+    "passport-local": "~1.0.0",
+    "passport-twitter": "~1.0.2",
+    "path": "0.12.7",
+    "request": "latest",
+    "session": "^0.1.0",
+    "static-favicon": "~2.0.0-alpha"
+  }
+}
