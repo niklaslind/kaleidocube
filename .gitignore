@@ -40,4 +40,4 @@ Thumbs.db
 ######################
 node_modules/
 data/
-database.js
+config/database.js
