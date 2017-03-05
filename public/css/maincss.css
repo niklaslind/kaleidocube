@@ -1,10 +1,13 @@
 
 body{
     padding-top:80px;
-    background-image: url("../img/kaleidoBackground2.jpg");
+    /*background-image: url("../img/kaleidoBackground2.jpg"); */
     color: white;
     }
 
+.container{
+  width: 100%;  
+}
 
 #inputForm{
    background: rgba(233, 109, 101, 0.88);
@@ -13,3 +16,15 @@ body{
     margin-right: 5%;
 }
 
+
+.inputDate{
+  width:10%;
+}
+
+.select-standard{
+  font-size: 5vw;
+}
+
+#eNumberPresentation{
+  font-size: 20vw;
+}
