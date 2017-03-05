@@ -1,0 +1,95 @@
+<!-- views/login.ejs -->
+<!doctype html>
+<html>
+<head>
+	<title>KaleidoCube</title>
+
+	<!--	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="../lib/bootstrap/bootstrap-3.0.2.min.css"> 
+  
+	<!--	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> -->
+  <link rel="stylesheet" href="../lib/bootstrap/font-awesome-4.0.3.min.css"> 
+  <link rel="stylesheet" href="../css/maincss.css"> 
+
+	<script src="../lib/Jquery/jquery-2.0.3.min.js"></script>
+  <script type="text/javascript" src="../js/scriptMain.js"></script>
+
+
+
+
+	<style>
+
+
+		body 		{ padding-top:80px; background-image: url("../img/kaleidoBackground2.jpg"); color: white;}
+
+
+	</style>
+
+</head>
+<body>
+
+	<h1><span class="fa fa-sign-in"></span> Alex och Evelina hälsar från skåne!</h1>
+
+		<div id="inputForm" class="nl-blurred">
+			<div class="container demo-1">
+	
+				<header>
+					<h1>Natural Language Form <span>with custom input elements</span></h1>	
+				</header>
+				<div class="main clearfix">
+					<form id="nl-form" class="nl-form">
+						I feel to eat 
+						<select>
+							<option value="1" selected>any food</option>
+							<option value="2">Indian</option>
+							<option value="3">French</option>
+							<option value="4">Japanese</option>
+							<option value="2">Italian</option>
+						</select>
+						<br />in a
+						<select>
+							<option value="1" selected>standard</option>
+							<option value="2">fancy</option>
+							<option value="3">hip</option>
+							<option value="4">traditional</option>
+							<option value="2">romantic</option>
+						</select>
+						restaurant
+						<br />at 
+						<select>
+							<option value="1" selected>anytime</option>
+							<option value="1">7 p.m.</option>
+							<option value="2">8 p.m.</option>
+							<option value="3">9 p.m.</option>
+						</select>
+						in <input type="text" value="" placeholder="any city" data-subline="For example: <em>Los Angeles</em> or <em>New York</em>"/>
+						<div class="nl-submit-wrap">
+							<button class="nl-submit" type="submit">Find a restaurant</button>
+						</div>
+						<div class="nl-overlay"></div>
+					</form>
+				</div>
+			</div><!-- /container -->
+			<script src="../js/inputForm/nlform.js"></script>
+			<script>
+				var nlform = new NLForm( document.getElementById( 'nl-form' ) );
+			</script>
+	</div>
+
+
+
+
+
+
+	<hr>
+
+
+<button id="logout" class="btn btn-warning btn-lg" onclick="window.location.href='/logout'">Log out</button>
+
+
+</button>	
+		
+
+
+</body>
+</html>

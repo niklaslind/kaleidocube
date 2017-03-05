@@ -1,0 +1,15 @@
+
+body{
+    padding-top:80px;
+    background-image: url("../img/kaleidoBackground2.jpg");
+    color: white;
+    }
+
+
+#inputForm{
+   background: rgba(233, 109, 101, 0.88);
+    border-radius: 15%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
