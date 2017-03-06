@@ -41,6 +41,7 @@ Thumbs.db
 node_modules/
 data/
 database.js
+credentials.js
 
 # AWS #
 ######################
