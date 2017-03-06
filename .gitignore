@@ -41,3 +41,7 @@ Thumbs.db
 node_modules/
 data/
 config/database.js
+
+# AWS #
+######################
+.aws/
