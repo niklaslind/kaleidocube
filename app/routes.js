@@ -11,6 +11,8 @@
   */
 
 
+var AWS = require('aws-sdk');
+
 
 // app/routes.js
 module.exports = function(app, passport) {
@@ -135,6 +137,48 @@ module.exports = function(app, passport) {
     //res.render('login.ejs', { message: req.flash('loginMessage') });
 	});
 
+  
+	// =====================================
+	// ADD DATA TO AWS S3 STORAGE ==========
+	// =====================================
+		/**
+	 * @function addDataAws
+	 * @memberOf meantemplate.routes
+	 * @param {object} properties: req, res
+	 * @returns res - 
+	 * @description Add data to qws s3 storage
+	 */	
+
+	app.all('/addDataAws', function(req, res) {
+    var s3 = new AWS.S3();    
+    // Bucket names must be unique across all S3 users
+    
+    var myBucket = 'caleidodata';    
+    var myKey = '';
+    
+    s3.createBucket({Bucket: myBucket}, function(err, data) {    
+    if (err) {
+       console.log(err);
+       res.send(err);
+       } else {    
+         params = {Bucket: myBucket, Key: myKey, Body: 'Hello!'};    
+         s3.putObject(params, function(err, data) {    
+             if (err) {    
+                 console.log(err);
+                  res.send(err);
+
+             } else {    
+                 console.log("Successfully uploaded data to myBucket/myKey");    
+                  res.send("Successfully uploaded data to myBucket/myKey");
+
+             }    
+          });    
+       }    
+    });    
+	});  
+  
+  
+  
 
 };
 
