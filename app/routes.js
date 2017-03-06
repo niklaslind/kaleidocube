@@ -150,17 +150,19 @@ module.exports = function(app, passport) {
 	 */	
 
 	app.all('/addDataAws', function(req, res) {
-    var s3 = new AWS.S3();    
+    AWS.config.loadFromPath('./config/credentials.js');
+    var s3 = new AWS.S3();
+    
+    
     // Bucket names must be unique across all S3 users
+    console.log("++++++++++++");
+    console.log(AWS.config);
+
+    console.log("++++++++++++");
     
-    var myBucket = 'caleidodata';    
-    var myKey = '';
-    
-    s3.createBucket({Bucket: myBucket}, function(err, data) {    
-    if (err) {
-       console.log(err);
-       res.send(err);
-       } else {    
+    var myBucket = 'caleidodata2';    
+    var myKey = "{'testvar':'test'}";
+           
          params = {Bucket: myBucket, Key: myKey, Body: 'Hello!'};    
          s3.putObject(params, function(err, data) {    
              if (err) {    
@@ -173,8 +175,7 @@ module.exports = function(app, passport) {
 
              }    
           });    
-       }    
-    });    
+       
 	});  
   
   
