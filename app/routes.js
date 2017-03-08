@@ -138,6 +138,22 @@ module.exports = function(app, passport) {
 	});
 
   
+  
+  
+	app.all('/getUser', function(req, res) {
+    console.log("Logging out");
+    console.log('Data: ', req.body.data)
+    //for (key in req.body){
+    // console.log(key)      
+    //}
+//    console.log("data)
+
+    res.send("answer");
+    //res.render('login.ejs', { message: req.flash('loginMessage') });
+	});
+  
+  
+  
 	// =====================================
 	// ADD DATA TO AWS S3 STORAGE ==========
 	// =====================================
@@ -146,10 +162,58 @@ module.exports = function(app, passport) {
 	 * @memberOf meantemplate.routes
 	 * @param {object} properties: req, res
 	 * @returns res - 
-	 * @description Add data to qws s3 storage
+	 * @description Add data to aws s3 storage
 	 */	
 
 	app.all('/addDataAws', function(req, res) {
+    
+    var dataObject = req.body.data;
+    
+    AWS.config.loadFromPath('./config/credentials.js');
+    var s3 = new AWS.S3();
+    
+    
+    // Bucket names must be unique across all S3 users
+    console.log("++++++++++++");
+    console.log(AWS.config);
+
+    console.log("++++++++++++");
+    
+    var myBucket = 'caleidodata2';    
+    //var myKey = "{'testvar':'test'}";
+    var myKey = JSON.stringify(dataObject);
+           
+         params = {Bucket: myBucket, Key: myKey, Body: 'Hello!'};    
+         s3.putObject(params, function(err, data) {    
+             if (err) {    
+                 console.log(err);
+                  res.send(err);
+
+             } else {    
+                 console.log("Successfully uploaded data to myBucket/myKey");    
+                  res.send("Successfully uploaded data to myBucket/myKey");
+
+             }    
+          });    
+       
+	});  
+  
+  
+  
+
+  
+// =======================================
+	// ADD DATA TO AWS S3 STORAGE VIA RESRT 
+	// =====================================
+		/**
+	 * @function addDataAwsRest
+	 * @memberOf meantemplate.routes
+	 * @param {object} properties: req, res
+	 * @returns res - 
+	 * @description Add data to aws s3 storage via Rest
+	 */	
+
+	app.all('/addDataAwsRest', function(req, res) {
     AWS.config.loadFromPath('./config/credentials.js');
     var s3 = new AWS.S3();
     
@@ -176,11 +240,13 @@ module.exports = function(app, passport) {
              }    
           });    
        
-	});  
+	});   
   
   
   
-
+  
+  
+  
 };
 
 

@@ -43,7 +43,10 @@
 
 
 		<!-- Main CSS-->
-		<link rel="stylesheet" href="../css/maincss.css"> 
+		<link rel="stylesheet" href="../css/maincss.css">
+		<!-- Buttons CSS-->
+		<link rel="stylesheet" href="../css/buttons.css"> 
+		
 
 		<!-- Jquery-->	
 		<script src="../lib/Jquery/jquery-2.0.3.min.js"></script>
@@ -74,8 +77,8 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
+                <li class="active"><a href="#">Hem</a></li>
+                <li><a href="#about">Om</a></li>
                 <li><a href="/logout">Logga ut</a></li>
               </ul>
             </div>
@@ -111,33 +114,44 @@
 
 					<form id="nl-form" class="nl-form">
 						Jag 
-						<select class="selectActivity" id="formActivityType" >
-							<option value="0" selected>sprang</option>
-							<option value="1">cyklade</option>
-							<option value="2">gick</option>
-							<option value="3">åt</option>
-							<option value="4">sov</option>
+						<select id="selectActivity" class="selectActivity" id="formActivityType" >
+							<option value="0" selected></option>
+							<option value="1">sprang</option>
+							<option value="2">cyklade</option>
+							<option value="3">gick</option>
+							<option value="4">åt</option>
+							<option value="5">sov</option>
 						</select>
 						
             så mycket som
 						
-						<input class="inputDate" type="text" value="" placeholder="1" data-subline="Skriv tex <em>hur långt</em> eller <em>hur mycket</em>"/>
+						<input id="inputValue" class="inputDate" type="text" value="" placeholder="" data-subline="Skriv tex <em>hur långt</em> eller <em>hur mycket</em>"/>
 						
-						<label id="inputUnit"> km</label>
+						<label id="inputUnit"></label>
 						
 						precis 
-						<select>
+						<select id="timePoint" >
 							<option value="0" selected> just nu</option>
-							<option value="1">7 p.m.</option>
-							<option value="2">8 p.m.</option>
-							<option value="3">9 p.m.</option>
+							<option value="1">7 a.m.</option>
+							<option value="2">9 a.m.</option>
+							<option value="3">11 a.m.</option>
+							<option value="4">1 p.m.</option>
+							<option value="5">3 p.m.</option>
+							<option value="6">5 p.m.</option>
+							<option value="7">7 p.m.</option>
+							<option value="8">9 p.m.</option>
+							<option value="9">11 p.m.</option>			
+						
+						
 						</select>
 
 
 
-						<div class="nl-submit-wrap">
-							<button class="nl-submit" type="submit">Spara</button>
-						</div>
+					<div class="buttonHolder">
+						<div id="sendPost" class="button tick"></div>
+						<div id="clearForm" class="button cross"></div>
+					</div>
+
 						<div class="nl-overlay"></div>
 					</form>
 				</div>
