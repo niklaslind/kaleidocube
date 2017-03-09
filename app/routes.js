@@ -12,6 +12,7 @@
 
 
 var AWS = require('aws-sdk');
+var async = require('async');
 
 
 // app/routes.js
@@ -172,13 +173,6 @@ module.exports = function(app, passport) {
     AWS.config.loadFromPath('./config/credentials.js');
     var s3 = new AWS.S3();
     
-    
-    // Bucket names must be unique across all S3 users
-    console.log("++++++++++++");
-    console.log(AWS.config);
-
-    console.log("++++++++++++");
-    
     var myBucket = 'caleidodata2';    
     //var myKey = "{'testvar':'test'}";
     var myKey = JSON.stringify(dataObject);
@@ -188,15 +182,77 @@ module.exports = function(app, passport) {
              if (err) {    
                  console.log(err);
                   res.send(err);
-
              } else {    
                  console.log("Successfully uploaded data to myBucket/myKey");    
                   res.send("Successfully uploaded data to myBucket/myKey");
-
              }    
-          });    
-       
+          });           
 	});  
+  
+  
+	// =====================================
+	// GET DATA FROM AWS S3 STORAGE ==========
+	// =====================================
+		/**
+	 * @function getDataAws
+	 * @memberOf meantemplate.routes
+	 * @param {object} properties: req, res
+	 * @returns res - 
+	 * @description Get data from aws s3 storage
+	 */	
+
+	app.all('/getDataAws', function(req, res) {
+        
+    AWS.config.loadFromPath('./config/credentials.js');
+    var s3 = new AWS.S3();
+    
+    var myBucket = 'caleidodata2';
+    var params = {Bucket: myBucket};
+    s3.listObjects(params, function (err, data) {
+    if(err)throw err;
+    respArray = [];
+    
+    
+    async.eachSeries(data.Contents, function (item, callback) {
+      //console.log(prime);
+      respArray.push(item.Key);
+      callback(); // Alternatively: callback(new Error());
+    }, function (err) {
+      if (err) { throw err; }
+      console.log(respArray);
+      res.send({'data':respArray});
+    });
+    
+
+    
+    });
+    
+    
+    
+    //listAllKeys(marker,
+    //            function() {
+    //              
+    //            }
+    //            )
+    
+    
+    
+	});  
+
+  
+  
+  //var allKeys = [];
+  //function listAllKeys(marker, cb)
+  //{
+  //  s3.listObjects({Bucket: s3bucket, Marker: marker}, function(err, data){
+  //    allKeys.push(data.Contents);
+  //
+  //    if(data.IsTruncated)
+  //      listAllKeys(data.NextMarker, cb);
+  //    else
+  //      cb();
+  //  });
+  //}
   
   
   

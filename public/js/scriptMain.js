@@ -8,6 +8,8 @@ var timeList = {
 };
 
 
+var dataSet;
+
 $(document).ready(function(){
   
   // ToDo: Merge functions
@@ -18,9 +20,27 @@ $(document).ready(function(){
         $( "#timePoint").val('0');
 	}
   
-  $( "#clearForm" ).click(function() {
+  	function getData() {
+  
+  		$.post('/getDataAws',
+		{
+            'data':'test'
+		},
+		function(resp){
+			console.log("+++++++");
+            console.log(resp.data);
+            dataSet = resp.data
+		});	
+  
+	}
+  
+  
+  
+  
+  $( "#clearForm" ).click(function() {      	    
     clearForm();
   });
+  
   
   
   $( "#sendPost" ).click(function() {
@@ -48,10 +68,10 @@ $(document).ready(function(){
     
     sendPost(sendPostObject,
              function() {
-              
+                getData();
                 clearForm();
                 
-             })
+             });
     
     
     //console.log(
