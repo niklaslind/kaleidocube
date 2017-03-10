@@ -212,9 +212,11 @@ module.exports = function(app, passport) {
     if(err)throw err;
     respArray = [];
     
-    
+    console.log("==========\n=============");
+    console.log(data);
+    console.log("==========\n=============");
     async.eachSeries(data.Contents, function (item, callback) {
-      //console.log(prime);
+      
       respArray.push(item.Key);
       callback(); // Alternatively: callback(new Error());
     }, function (err) {

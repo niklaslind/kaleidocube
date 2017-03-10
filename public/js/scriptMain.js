@@ -1,18 +1,57 @@
 
-var activityList = {
-    0:'',1:'sprang',2:'cyklade',3:'gick',4:'åt',5:'sov'
-};
-
-var timeList = {
-    0:'Just nu',1:'7 a.m.',2:'9 a.m.',3:'11 a.m.',4:'1 p.m.',5:'3 p.m.',6:'5 p.m.',7:'7 p.m.',8:'9 p.m.',9:'9 p.m.'
-};
-
-
+var activityList = { 0:'',1:'cyklade',2:'sprang',3:'gick',4:'åt',5:'sov'};
+var timeList = {0:'Just nu',1:'7 a.m.',2:'9 a.m.',3:'11 a.m.',4:'1 p.m.',5:'3 p.m.',6:'5 p.m.',7:'7 p.m.',8:'9 p.m.',9:'9 p.m.'};
+var eNumbers ={};
 var dataSet;
 
 $(document).ready(function(){
-  
-  // ToDo: Merge functions
+
+    
+    getData(function(dataSet){
+        calculateEnumberMain(dataSet);
+        updateEventList();
+            });
+
+            
+            
+     function calculateEnumberMain(dataSet){
+                
+        for (var key in activityList) {
+            var tempValueArray = extractValues(dataSet, key);
+            var curEnum = calcEnum(tempValueArray);
+            eNumbers[key] = curEnum;
+            updateEnumber();
+        }
+          
+                
+        return;    
+    } 
+
+
+    function calcEnum(curArray){
+        var lowestNumber = curArray.sort()[0];
+        for (var m = curArray.length; m > 0; m--){
+            if (m <= lowestNumber) {
+                return m;
+            }
+        }
+        return 1;
+    }
+    
+
+
+    function extractValues(dataSet, i)
+    {
+        var valueArray = [];
+        dataSet.forEach(function(item) {
+            item = JSON.parse(item);
+            if (item.activityCode == i){
+                valueArray.push(item.dataValue);    
+            }
+        });
+        return valueArray;
+    }
+    
   
   	function clearForm() {
         $( "#selectActivity").val('0');
@@ -20,8 +59,7 @@ $(document).ready(function(){
         $( "#timePoint").val('0');
 	}
   
-  	function getData() {
-  
+    function getData(callback) {
   		$.post('/getDataAws',
 		{
             'data':'test'
@@ -29,14 +67,13 @@ $(document).ready(function(){
 		function(resp){
 			console.log("+++++++");
             console.log(resp.data);
-            dataSet = resp.data
+            dataSet = resp.data;
+            callback(resp.data)
 		});	
-  
-	}
-  
+    }
   
   
-  
+    
   $( "#clearForm" ).click(function() {      	    
     clearForm();
   });
@@ -45,9 +82,9 @@ $(document).ready(function(){
   
   $( "#sendPost" ).click(function() {
     
-    if ($( "#selectActivity").val() == '0' || $( "#inputValue").val() == '') {
+    if ($( "#selectActivity").val() === '0' || $( "#inputValue").val() === '') {
         alert("Var snäll och fyll i alla värden");
-        return
+        return;
     }
     
     var now = new Date();
@@ -62,32 +99,19 @@ $(document).ready(function(){
         'timepointDescription': timeList[$( "#timePoint").val()],
         'timestamp' : now
         
-    }
-    console.log(sendPostObject);
-    
+    };
     
     sendPost(sendPostObject,
              function() {
-                getData();
+                getData(
+                        function(output){
+                            console.log("==========\n Data fetched: ", output)
+                        }
+                        );
+                updateEventList(dataSet);
                 clearForm();
-                
              });
-    
-    
-    //console.log(
-    //   "activity: ",  $( "#selectActivity").val(), '#:',  activityList[$( "#selectActivity").val()],
-    //    "Value: ", $( "#inputValue").val(),     
-    //    "Time: ", $( "#timePoint").val()
-    //)
-    
-    //var dataPost = {activity:, model:"500", color:"white"};
-    
-    
-    
-    
-  
   });
-  
   
   
     
@@ -96,14 +120,25 @@ $(document).ready(function(){
 		{
             'data':arg1
 		},
-		function(curUserInfo,status){
+		function(curUserInfo){
 			callback(curUserInfo);
 		});	
 
 	}
   
   
-  
+    function updateEventList(){
+        var tmpString = ""
+        dataSet.forEach(function(item) {
+            item = JSON.parse(item);
+            
+            tmpString += "Jag " + item.activityDescription + item.dataValue + " km klockan " + item.timepointDescription + ", lagrat " + item.timestamp + "<br>";
+            //console.log(tmpString);
+                    
+        });
+        $( "#dataCollection").html(tmpString);            
+        
+    }
   
   
       // Update form unit
@@ -139,42 +174,42 @@ $(document).ready(function(){
     
     });
     
+  function updateEnumber() {
     
-
-
-    // Update E number
-    $( ".selectNumber" ).change(function() {
-      var selVal = $(".selectNumber").val();
+    var selVal = $(".selectNumber").val();
       var output = "";
   
       switch (selVal) {
       case "0":
-          output  = "22";
+          output  = eNumbers[0];
           break;
       case "1":
-          output  = "12";
+          output  = eNumbers[1];
           break; 
       case "2":
-          output  = "4";
+          output  = eNumbers[2];
           break; 
       case "3":
-          output  = "5";
+          output  = eNumbers[3];
           break; 
       case "4":
-          output  = "8";
+          output  = eNumbers[4];
           break; 
       default: 
-          output = "0";
+          output = eNumbers[5];
       }
     
-    //$( "#eNumberPresentation").attr('innerHTML', output);        
-    $( "#eNumberPresentation").html(output);        
-          
+    $( "#eNumberPresentation").html(output);
+            
+  }
   
+  
+  
+    // Update E number
+    $( ".selectNumber" ).change(function() {
+        updateEnumber();
     });
-  
-  
-  
+    
   });
 
 
