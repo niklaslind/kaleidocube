@@ -12,8 +12,7 @@ $(document).ready(function(){
         updateEventList();
             });
 
-            
-            
+                        
      function calculateEnumberMain(dataSet){
                 
         for (var key in activityList) {
@@ -22,20 +21,21 @@ $(document).ready(function(){
             eNumbers[key] = curEnum;
             updateEnumber();
         }
-          
-                
         return;    
     } 
 
 
     function calcEnum(curArray){
-        var lowestNumber = curArray.sort()[0];
+        
+        var maxLen = curArray.length;
         for (var m = curArray.length; m > 0; m--){
-            if (m <= lowestNumber) {
-                return m;
+            if (curArray[maxLen - m] >= m){
+                return m;                
             }
+        //return '?';
         }
-        return 1;
+        return '?';
+    
     }
     
 
@@ -65,10 +65,8 @@ $(document).ready(function(){
             'data':'test'
 		},
 		function(resp){
-			console.log("+++++++");
-            console.log(resp.data);
             dataSet = resp.data;
-            callback(resp.data)
+            callback(resp.data);
 		});	
     }
   
@@ -94,21 +92,24 @@ $(document).ready(function(){
         'activityDescription': activityList[$( "#selectActivity").val()],
        
         'dataValue': $( "#inputValue").val(),
+        'dataUnit': $( "#inputUnit").text(),        
         
         'timepointCode': $( "#timePoint").val(),
         'timepointDescription': timeList[$( "#timePoint").val()],
         'timestamp' : now
         
     };
-    
+    console.log("sendPostObject: ", sendPostObject)
     sendPost(sendPostObject,
              function() {
                 getData(
                         function(output){
-                            console.log("==========\n Data fetched: ", output)
-                        }
-                        );
-                updateEventList(dataSet);
+                            //console.log("==========\n Data fetched: ", output)
+                            //updateEnumber();
+                            updateEventList();
+                            calculateEnumberMain(dataSet);
+
+                        });
                 clearForm();
              });
   });
@@ -128,11 +129,10 @@ $(document).ready(function(){
   
   
     function updateEventList(){
-        var tmpString = ""
+        var tmpString = "";
         dataSet.forEach(function(item) {
-            item = JSON.parse(item);
-            
-            tmpString += "Jag " + item.activityDescription + item.dataValue + " km klockan " + item.timepointDescription + ", lagrat " + item.timestamp + "<br>";
+            item = JSON.parse(item);            
+            tmpString += "<p> Jag " + item.activityDescription + " " + item.dataValue + " " + item.dataUnit + " klockan " + item.timepointDescription + ", lagrat " + item.timestamp + "</p>";
             //console.log(tmpString);
                     
         });
@@ -152,10 +152,10 @@ $(document).ready(function(){
           output  = "";
           break;
       case "1":
-          output  = "km";
+          output  = "mil";
           break;
       case "2":
-          output  = "mil";
+          output  = "km";
           break; 
       case "3":
           output  = "km";

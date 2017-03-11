@@ -166,10 +166,24 @@ module.exports = function(app, passport) {
 	 * @description Add data to aws s3 storage
 	 */	
 
-	app.all('/addDataAws', function(req, res) {
+
+//	app.all('/addDataAws', function(req, res) {
+//    console.log("===========\n Session:");
+//    for (var key in req.session){
+//      console.log(key);
+//    }
+//    console.log("User:", req.session.passport.user);
+//  });
+
+
+	app.all('/addDataAws', isLoggedIn,
+          //passport.authenticate('local-login', { session: false }),
+          function(req, res) {
+  
     
     var dataObject = req.body.data;
-    
+    var userId = req.session.passport.user;
+    dataObject.userId = userId;
     AWS.config.loadFromPath('./config/credentials.js');
     var s3 = new AWS.S3();
     
@@ -201,8 +215,16 @@ module.exports = function(app, passport) {
 	 * @description Get data from aws s3 storage
 	 */	
 
-	app.all('/getDataAws', function(req, res) {
+	app.all('/getDataAws', isLoggedIn,
+          //passport.authenticate('local-login', { session: false }),
+          function(req, res) {
         
+    console.log("############ \n Im IN  \n ###########");    
+     
+    var userId = req.session.passport.user;
+
+//    dataObject.userId = userId;
+
     AWS.config.loadFromPath('./config/credentials.js');
     var s3 = new AWS.S3();
     
@@ -212,103 +234,22 @@ module.exports = function(app, passport) {
     if(err)throw err;
     respArray = [];
     
-    console.log("==========\n=============");
-    console.log(data);
-    console.log("==========\n=============");
-    async.eachSeries(data.Contents, function (item, callback) {
-      
-      respArray.push(item.Key);
+    async.eachSeries(data.Contents, function (item, callback) {      
+      if (JSON.parse(item.Key).userId === userId){
+        respArray.push(item.Key);  
+      }
       callback(); // Alternatively: callback(new Error());
     }, function (err) {
       if (err) { throw err; }
       console.log(respArray);
       res.send({'data':respArray});
     });
-    
 
-    
     });
-    
-    
-    
-    //listAllKeys(marker,
-    //            function() {
-    //              
-    //            }
-    //            )
-    
-    
-    
+        
 	});  
-
-  
-  
-  //var allKeys = [];
-  //function listAllKeys(marker, cb)
-  //{
-  //  s3.listObjects({Bucket: s3bucket, Marker: marker}, function(err, data){
-  //    allKeys.push(data.Contents);
-  //
-  //    if(data.IsTruncated)
-  //      listAllKeys(data.NextMarker, cb);
-  //    else
-  //      cb();
-  //  });
-  //}
-  
-  
-  
-
-  
-// =======================================
-	// ADD DATA TO AWS S3 STORAGE VIA RESRT 
-	// =====================================
-		/**
-	 * @function addDataAwsRest
-	 * @memberOf meantemplate.routes
-	 * @param {object} properties: req, res
-	 * @returns res - 
-	 * @description Add data to aws s3 storage via Rest
-	 */	
-
-	app.all('/addDataAwsRest', function(req, res) {
-    AWS.config.loadFromPath('./config/credentials.js');
-    var s3 = new AWS.S3();
-    
-    
-    // Bucket names must be unique across all S3 users
-    console.log("++++++++++++");
-    console.log(AWS.config);
-
-    console.log("++++++++++++");
-    
-    var myBucket = 'caleidodata2';    
-    var myKey = "{'testvar':'test'}";
-           
-         params = {Bucket: myBucket, Key: myKey, Body: 'Hello!'};    
-         s3.putObject(params, function(err, data) {    
-             if (err) {    
-                 console.log(err);
-                  res.send(err);
-
-             } else {    
-                 console.log("Successfully uploaded data to myBucket/myKey");    
-                  res.send("Successfully uploaded data to myBucket/myKey");
-
-             }    
-          });    
-       
-	});   
-  
-  
-  
-  
-  
   
 };
-
-
-
 
 
 		/**
