@@ -1,7 +1,13 @@
 
+@media (min-width: 768px)
+bootstrap.css:1783
+.col-sm-9 {
+    width: 100%;
+}
+
+/*
 body{
     padding-top:80px;
-    /*background-image: url("../img/kaleidoBackground2.jpg"); */
     color: white;
     }
 
@@ -27,4 +33,4 @@ body{
 
 #eNumberPresentation{
   font-size: 20vw;
-}
+}*/
