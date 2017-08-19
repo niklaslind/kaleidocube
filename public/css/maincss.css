@@ -1,36 +1,6 @@
-
-@media (min-width: 768px)
-bootstrap.css:1783
-.col-sm-9 {
-    width: 100%;
-}
-
-/*
-body{
-    padding-top:80px;
-    color: white;
+@media (min-width: 1200px)
+{
+    .w30p {
+        width:30%;
     }
-
-.container{
-  width: 100%;  
 }
-
-#inputForm{
-   background: rgba(233, 109, 101, 0.88);
-    border-radius: 15%;
-    margin-left: 5%;
-    margin-right: 5%;
-}
-
-
-.inputDate{
-  width:10%;
-}
-
-.select-standard{
-  font-size: 5vw;
-}
-
-#eNumberPresentation{
-  font-size: 20vw;
-}*/

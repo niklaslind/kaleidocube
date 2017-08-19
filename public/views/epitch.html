@@ -17,10 +17,17 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="../bootstrap/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+
     <!-- Custom styles for this template -->
     <link href="../css/offcanvas.css" rel="stylesheet">
-    <link href="../css/maincss.css" rel="stylesheet">
+    <link href="../css/reports.css" rel="stylesheet">
     <link href="../css/cards.css" rel="stylesheet">
+    <link href="../css/modal.css" rel="stylesheet">
+    <link href="../css/maincss.css" rel="stylesheet">
+
+
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../bootstrap/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -34,6 +41,67 @@
   </head>
 
   <body>
+		
+
+
+
+
+
+
+
+<div id="openModal_dataVisualization" class="modalDialog">
+    <div>	<a href="#close" title="Close" class="close">X</a>
+						
+						<div class="bgimg-1">
+							<div class="caption">
+								<span class="border">SCROLL DOWN</span>
+							</div>
+						</div>
+						
+						<div style="color: #777;background-color:white;text-align:center;padding:50px 80px;text-align: justify;">
+							<h3 style="text-align:center;">Parallax Demo</h3>
+							<p>Parallax scrolling is a web site trend where the background content is moved at a different speed than the foreground content while scrolling. Nascetur per nec posuere turpis, lectus nec libero turpis nunc at, sed posuere mollis ullamcorper libero ante lectus, blandit pellentesque a, magna turpis est sapien duis blandit dignissim. Viverra interdum mi magna mi, morbi sociis. Condimentum dui ipsum consequat morbi, curabitur aliquam pede, nullam vitae eu placerat eget et vehicula. Varius quisque non molestie dolor, nunc nisl dapibus vestibulum at, sodales tincidunt mauris ullamcorper, dapibus pulvinar, in in neque risus odio. Accumsan fringilla vulputate at quibusdam sociis eleifend, aenean maecenas vulputate, non id vehicula lorem mattis, ratione interdum sociis ornare. Suscipit proin magna cras vel, non sit platea sit, maecenas ante augue etiam maecenas, porta porttitor placerat leo.</p>
+						</div>
+						
+						<div class="bgimg-2">
+							<div class="caption">
+								<span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">LESS HEIGHT</span>
+							</div>
+						</div>
+						
+						<div style="position:relative;">
+							<div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
+								<p>Scroll up and down to really get the feeling of how Parallax Scrolling works.</p>
+							</div>
+						</div>
+						
+						<div class="bgimg-3">
+							<div class="caption">
+								<span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">SCROLL UP</span>
+							</div>
+						</div>
+						
+						<div style="position:relative;">
+							<div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
+								<p>Scroll up and down to really get the feeling of how Parallax Scrolling works.</p>
+							</div>
+						</div>
+						
+						<div class="bgimg-1">
+							<div class="caption">
+								<span class="border">COOL!</span>
+							</div>
+						</div>
+	
+	
+	  </div>
+</div>
+		
+		
+		
+		
+		
+		
     <nav class="navbar navbar-fixed-top navbar-inverse">
       <div class="container">
         <div class="navbar-header">
@@ -57,6 +125,9 @@
 
     <div class="container">
 
+
+
+
       <div class="row row-offcanvas row-offcanvas-right">
 
         <div class="col-xs-12 col-sm-9_edit">					
@@ -69,48 +140,7 @@
 						<div class="container">
 							<div class="row">
 			
-			
-		<!--	
-		<div class="col-lg-3 col-sm-6">
-
-            <div class="card hovercard">
-                <div class="cardheader">
-
-                </div>
-                <div class="avatar">
-                    <img alt="" src="../img/profiles/test01.jpeg">
-                </div>
-                <div class="info">
-                    <div class="title">
-                        <a target="_blank" href="http://scripteden.com/">Script Eden</a>
-                    </div>
-                    <div class="desc">Passionate designer</div>
-                    <div class="desc">Curious developer</div>
-                    <div class="desc">Tech geek</div>
-                </div>
-                <div class="bottom">
-                    <a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/webmaniac">
-                        <i class="fa fa-twitter"></i>
-                    </a>
-                    <a class="btn btn-danger btn-sm" rel="publisher"
-                       href="https://plus.google.com/+ahmshahnuralam">
-                        <i class="fa fa-google-plus"></i>
-                    </a>
-                    <a class="btn btn-primary btn-sm" rel="publisher"
-                       href="https://plus.google.com/shahnuralam">
-                        <i class="fa fa-facebook"></i>
-                    </a>
-                    <a class="btn btn-warning btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
-                        <i class="fa fa-behance"></i>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-
--->
-
-
+		
 
 
 	</div>
@@ -129,7 +159,7 @@
       <hr>
 
       <footer>
-        <p>&copy; 2015 Company, Inc.</p>
+        <p>&copy; 2017 Company, Inc.</p>
       </footer>
 
     </div><!--/.container-->
@@ -145,5 +175,11 @@
     <script src="../bootstrap/assets/js/ie10-viewport-bug-workaround.js"></script>
     <script src="../js/offcanvas.js"></script>
     <script src="../js/scriptMain.js"></script>
+		
+<!--    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>-->
+    <script src="../js/modal.js"></script>
+		
+		
+		
   </body>
 </html>
